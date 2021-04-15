@@ -1,29 +1,37 @@
 const router = require("express").Router();
 const booksController = require("../../controllers/booksController");
+const Questions = require('../../models/questions');
 
 router.post('/create', (req, res) => {
+    Questions.create(req.body)
+        .then(result =>
+            res.status(200).json(result))
+        .catch(err =>
+            res.status(400).json(err))
+
     console.log('api/questions/create route hit');
-    res.json({message: "success"});
+    
 });
+
 
 router.post('/upvote', (req, res) => {
     console.log('api/questions/upvote route hit');
-    res.json({message: "success"});
+    res.json({ message: "successfull upvote" });
 });
 
 router.post('/downvote', (req, res) => {
     console.log('api/questions/downvote route hit');
-    res.json({message: "success"});
+    res.json({ message: "successful downvote" });
 });
 
 router.post('/follow', (req, res) => {
     console.log('api/questions/follow route hit');
-    res.json({message: "success"});
+    res.json({ message: "successesful follow" });
 });
 
-router.post('/find', (req, res) => {
+router.get('/find', (req, res) => {
     console.log('api/questions/find route hit');
-    res.json({message: "success"});
+    res.json({ message: "successeful find" });
 });
 
 
