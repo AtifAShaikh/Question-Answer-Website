@@ -19,4 +19,20 @@ router.post('/create', (req, res) => {
     res.json({message: "success"});
 });
 
+router.post('/login', (req, res) => {
+    console.log('api/users/login route hit');
+    res.json({message: "successful login"});
+});
+
+router.put('/update', (req, res) => {
+    console.log('api/users/update route hit');
+    res.json({message: "successful update"});
+});
+
+router.get('/find', (req, res) => {
+    console.log('api/users/find route hit');
+    res.json({message: "successful find"});
+});
+
+
 module.exports = router;
