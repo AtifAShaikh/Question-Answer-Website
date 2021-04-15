@@ -1,3 +1,7 @@
+const Answers = require("./answers");
+
 module.exports = {
-  Book: require("./book")
+  User: require("./user"),
+  Questions: require('./questions'),
+  Answers: require("./answers")
 };
