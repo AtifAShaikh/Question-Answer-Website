@@ -6,10 +6,6 @@ const AnswersSchema = new Schema({
 
     userId: String,
 
-    upvotes: Number,
-
-    downvotes: Number,
-
     favorited: Boolean,
 
     upvoters: [
