@@ -13,10 +13,7 @@ const QuestionSchema = new Schema({
             }
         }],
 
-    upvotes: Number,
-
-    downvotes: Number,
-
+ 
     upvoters: [
     {
         userID: {
