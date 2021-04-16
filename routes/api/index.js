@@ -1,17 +1,16 @@
 const router = require("express").Router();
-const { Answers } = require("../../models");
-const bookRoutes = require("./books");
 const userRoutes = require("./users");
 const answerRoutes = require("./answers");
 const questionRoutes = require("./questions");
 
-// Book routes
-router.use("/books", bookRoutes);
+
+// routes
 router.use('/users', userRoutes);
 router.use("/answers", answerRoutes);
 router.use("/questions" , questionRoutes);
 
 module.exports = router;
+
 
 // router.post('/', async (req, res) => {
 //   try {
