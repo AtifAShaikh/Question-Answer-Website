@@ -1,10 +1,20 @@
 const router = require("express").Router();
 const booksController = require("../../controllers/booksController");
+const answers = require('../../models/answers');
 
 
 router.post('/create', (req, res) => {
+    
+    answers.create(req.body)
+        .then(result =>
+            res.status(200).json(result))
+        .catch(err =>
+            res.status(400).json(err))
+    
+    
+    
     console.log('api/answers/create route hit');
-    res.json({message: "success"});
+   
 });
 
 router.post('/favorite', (req, res) => {
@@ -27,7 +37,7 @@ router.post('/follow', (req, res) => {
     res.json({message: "successful follow"});
 });
 
-router.post('/find', (req, res) => {
+router.get('/find', (req, res) => {
     console.log('api/answers/find route hit');
     res.json({message: "successful find"});
 });
