@@ -1,0 +1,28 @@
+.links{
+    margin-left: 60%;
+
+}
+
+.signup{
+}
+
+.nav-link{
+    padding-left: 30px;
+}
+
+/* .navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 3rem;
+    padding-left: .5rem;
+} */
+
+.signup{
+    padding-left: 3rem;
+}
+
+.navbar-brand{
+    margin-left: 200px;
+}
+
+.landingNav{
+    background-color: #0ec0a6;
+}

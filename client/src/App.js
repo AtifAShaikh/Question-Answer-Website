@@ -6,11 +6,10 @@ import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
 import Landing from "./pages/Landing";
 
+
 function App() {
   return (
     <Router>
-      <div>
-        <Nav />
         <Switch>
           <Route exact path={["/"]}>
             <Landing/>
@@ -22,7 +21,6 @@ function App() {
             <NoMatch />
           </Route>
         </Switch>
-      </div>
     </Router>
   );
 }
