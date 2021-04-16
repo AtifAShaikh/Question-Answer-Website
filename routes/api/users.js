@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const usersController = require("../../controllers/usersController");
-// const User  = require('../../models/user');
+
 
 // Matches with "/api/posts"
 router
