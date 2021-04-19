@@ -12,6 +12,7 @@ function LoginModal() {
     e.preventDefault();
     console.log('attempting login with credentials');
     console.log(loginInputState);
+    document.location.replace('/home');
   }
 
   useEffect(() => {

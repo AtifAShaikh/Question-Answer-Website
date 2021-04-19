@@ -5,6 +5,7 @@ import Detail from "./pages/Detail";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
 import Landing from "./pages/Landing";
+import Home from "./pages/Home";
 
 
 function App() {
@@ -13,6 +14,9 @@ function App() {
         <Switch>
           <Route exact path={["/"]}>
             <Landing/>
+          </Route>
+          <Route exact path={['/home']}>
+            <Home></Home>
           </Route>
           <Route exact path="/books/:id">
             <Detail />
