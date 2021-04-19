@@ -8,7 +8,10 @@ const questionRoutes = require("./questions");
 router.use('/users', userRoutes);
 router.use("/answers", answerRoutes);
 router.use("/questions" , questionRoutes);
-
+router.get("/test-request", (req, res)=>{
+    console.log(req.session);
+    res.send('Hello' + JSON.stringify(req.session));
+});
 module.exports = router;
 
 
