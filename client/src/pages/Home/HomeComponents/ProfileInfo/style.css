@@ -1,0 +1,19 @@
+.profileDiv{
+    background-color: #0ec0a6;
+    color: black;
+    border-radius: 15px;
+}
+
+.profilePic{
+    border-radius: 60%;
+}
+
+.logoutButton{
+    background-color: black;
+    color: white;
+    border: none;
+}
+
+.logoutButton:hover{
+    background-color: rgb(126, 15, 15);
+}

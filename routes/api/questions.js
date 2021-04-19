@@ -2,6 +2,10 @@ const router = require("express").Router();
 const questionsController = require("../../controllers/questionsController");
 
 
+
+// const Questions = require('../../models/questions');
+
+
 // Matches with "/api/posts"
 router
   .route("/")
