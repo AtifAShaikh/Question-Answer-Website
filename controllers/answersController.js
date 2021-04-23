@@ -57,4 +57,9 @@ module.exports = {
           res.json({message: 'success'});
         })    
   },
+  getnumanswers: function(req, res) {
+    db.Answers.find({questionId: req.body.qId})
+    .then((dbModel)=>res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+  }
 };

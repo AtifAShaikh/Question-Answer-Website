@@ -1,7 +1,25 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import './style.css';
 
 function QuestionFeedItem(props){
+
+    const [answers, setAnswers] = useState({
+        answerList: [],
+    });
+
+    useEffect(()=>{
+        fetch('/api/answers/get/num', {
+            method: 'PUT',
+            body: JSON.stringify({qId: props.myId}),
+            headers: { 'Content-Type': 'application/json' },
+        }).then(res=>res.json())
+        .then((data)=>{
+            setAnswers({
+                answerList: data,
+            })
+        })
+    })
+
     return (
         <div className="feedQuestionBody p-3 mb-3" onClick={() => {
             console.log(props.myId);
@@ -23,7 +41,7 @@ function QuestionFeedItem(props){
             </div>
             <div className="d-flex align-items-start justify-content-start ml-2">
                 <img src="https://res.cloudinary.com/dj63qafw1/image/upload/v1618774281/commentv2_xcsxyz.png" width="30px" alt="comments"></img>
-                <h4 className="ml-2">0</h4 >
+                <h4 className="ml-2">{answers.answerList.length}</h4 >
             </div>
             
         </div>
