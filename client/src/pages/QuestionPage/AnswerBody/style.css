@@ -1,0 +1,18 @@
+.answerBody{
+    background-color: #0ec0a6;
+    color: black;
+    border-radius: 20px;
+}
+
+.aButt{
+    background-color: black;
+    color: white
+}
+
+.fav{
+    color:  white;
+}
+
+.aUpvoteText{
+    color: black;
+}

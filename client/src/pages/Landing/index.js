@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import LandingNav from "./LandingComponents/LandingNav";
 import LandingJumbo from './LandingComponents/LandingJumbo';
 import SignupModal from './LandingComponents/SignupModal';

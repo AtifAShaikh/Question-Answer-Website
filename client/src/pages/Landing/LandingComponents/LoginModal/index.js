@@ -8,18 +8,34 @@ function LoginModal() {
     email: '',
   });
 
-  const loginUser = (e) => {
-    e.preventDefault();
-    console.log('attempting login with credentials');
-    console.log(loginInputState);
-    document.location.replace('/home');
-  }
-
   useEffect(() => {
     //Display the value in the console. Initially it is empty.
     // console.log(loginInputState);
     //useEffect will trigger when the state changes.
   }, [loginInputState]);
+
+  function loginUserMain(){
+    console.log('logging in this user');
+    console.log(loginInputState);
+    fetch('/api/users/login', {
+      method: 'POST',
+      body: JSON.stringify(loginInputState),
+      headers: { 'Content-Type': 'application/json' },
+    }).then((response) => {
+      console.log('response here');
+      console.log(response);
+      if(response.status === 422 || response.status === 400){
+        alert('login failed');
+      } else if (response.status === 200){
+        console.log('login succesful');
+        document.location.replace('/home');
+      }
+      return response;
+    }).then((data) => {
+      console.log('data');
+      return data;
+    });
+  }
 
   return (
     <div className="modal fade bd-example-modal-lg login" tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -42,7 +58,7 @@ function LoginModal() {
           />
           <input
             name="lastName"
-            type="text"
+            type="password"
             placeholder="password"
             className="text-center inputArea"
             onChange={(e) => {
@@ -52,7 +68,10 @@ function LoginModal() {
               })
             }}
           />
-          <button onClick={loginUser} className="butt mb-3 mt-2">Submit</button>
+          <button onClick={(e)=> {
+            e.preventDefault();
+            loginUserMain()
+          }} className="butt mb-3 mt-2">Submit</button>
         </form>
     
       </div>

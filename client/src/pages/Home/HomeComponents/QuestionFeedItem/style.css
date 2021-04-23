@@ -1,0 +1,14 @@
+.sepperator{
+    background-color: #00d3b0;
+    height: 3px;
+    border-radius: 10px;
+}
+
+.bodyContent{
+    max-height: 400px;
+}
+
+.feedQuestionBody:hover{
+    background-color:  #00ccad;
+    cursor: pointer;
+}

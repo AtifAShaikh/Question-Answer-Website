@@ -5,28 +5,14 @@ const QuestionSchema = new Schema({
     title: String,
     
     body: String,
+
+    catagory: String,
     
-    askerID: [
-        {
-            userID: {
-                type: String
-            }
-        }],
+    askerID: String,
 
- 
-    upvoters: [
-    {
-        userID: {
-            type: String
-        }
-    }],
+    upvoters: [String],
 
-    downvoters: [
-        {
-            userID: {
-                type: String
-            }
-        }]
+    downvoters: [String],
 });
 
 const Questions = mongoose.model("Questions", QuestionSchema);

@@ -6,22 +6,13 @@ const AnswersSchema = new Schema({
 
     userId: String,
 
+    questionId: String,
+
     favorited: Boolean,
 
-    upvoters: [
-        {
-            userId: {
-                type: String
-            }
+    upvoters: [String],
 
-    }],
-
-    downvoters: [
-        {
-            userId: {
-                type: String
-            }
-        }],
+    downvoters: [String],
 })
 
 const Answers = mongoose.model("Answers", AnswersSchema);

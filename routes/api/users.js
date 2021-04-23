@@ -17,6 +17,13 @@ router
   .get(usersController.findById)
   .put(usersController.update)
   .delete(usersController.remove);
+
+
+router.post('/login', usersController.login);
+router.post('/logout', usersController.logout);
+router.get('/getuser/info', usersController.getuser);
+router.post('/follow/question', usersController.followQuestion)
+
 module.exports = router;
 
 

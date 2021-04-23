@@ -5,7 +5,7 @@
 }
 
 .profilePic{
-    border-radius: 60%;
+    border-radius: 15px;
 }
 
 .logoutButton{
@@ -16,4 +16,8 @@
 
 .logoutButton:hover{
     background-color: rgb(126, 15, 15);
+}
+
+.credits{
+    color: #969696;
 }
