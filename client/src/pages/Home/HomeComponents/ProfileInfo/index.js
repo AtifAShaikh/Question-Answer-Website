@@ -41,8 +41,8 @@ function ProfileInfo(props){
     // }
 
     return(
-        <div className="profileDiv d-flex justify-content-center align-items-center flex-column">
-            
+        <div>
+        <div className="profileDiv d-flex justify-content-center align-items-center flex-column"> 
             <img src={props.user.picture} width="80%" className="profilePic mt-4" onClick={()=> {
                 window.cloudinary.openUploadWidget({
                     cloudName: "dj63qafw1", uploadPreset: "h7f3zhfs",
@@ -65,6 +65,8 @@ function ProfileInfo(props){
             <h2>{props.user.username}</h2>
             <h5>{props.user.email}</h5>
             <button className="butt logoutButton align-center mb-3" onClick={logout}>Log Out</button>
+        </div>
+        <p className="text-center mt-2 credits">Made by Atif Shaikh | Erick Interiano | Chris Interiano</p>
         </div>
     );
 }
