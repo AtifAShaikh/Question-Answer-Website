@@ -3,7 +3,11 @@
 }
 
 .qPagePic{
-    border-radius: 100px;
+    border-radius: 15px;
+}
+
+.qPagePicA{
+    border-radius: 10px;
 }
 
 .qDisplayMain{

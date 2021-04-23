@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import './style.css';
-import AnswerBody from '../AnswerBody';
 import AnswerContainer from '../AnswerContainer';
 
 function QuestionPageBody(props){

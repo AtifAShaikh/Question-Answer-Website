@@ -57,7 +57,7 @@ function AnswerBody(props){
     }
 
     const giveFavButton = ()=>{
-        if(answerInfo.asker._id==answerInfo.user._id && !answerInfo.answer.favorited){
+        if(answerInfo.asker._id===answerInfo.user._id && !answerInfo.answer.favorited){
             return(
                 <button className="butt aButt" onClick={()=>{
                     favoriteAnswer();
@@ -137,7 +137,7 @@ function AnswerBody(props){
     return(
         <div className="answerBody p-4 mb-3">
             {askerApprovedTag()}
-            <img height="50px" src={answerInfo.answererData.picture} className="qPagePic mb-2"></img>
+            <img height="50px" src={answerInfo.answererData.picture} className="qPagePicA mb-2"></img>
             <h4>{answerInfo.answererData.username}</h4>
             <div className="sepperator mb-3"></div>
             <div className="ml-3" dangerouslySetInnerHTML={{__html: props.answerData.body}}></div>

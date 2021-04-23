@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import "./style.css";
 
 function SignupModal() {
@@ -13,23 +13,23 @@ function SignupModal() {
   const signupUser = (e) => {
     e.preventDefault();
     // console.log(signupInputState);
-    if(signupInputState.name==''){
+    if(signupInputState.name===''){
       alert('Please enter a username');
       return;
     }
-    if(signupInputState.email==''){
+    if(signupInputState.email===''){
       alert('Please enter an email');
       return;
     }
-    if(signupInputState.password==''){
+    if(signupInputState.password===''){
       alert('Please enter an password');
       return;
     }
-    if(signupInputState.password2==''){
+    if(signupInputState.password2===''){
       alert('Please re-enter your password');
       return;
     }
-    if(signupInputState.password != signupInputState.password2){
+    if(signupInputState.password !== signupInputState.password2){
       alert('Please make sure your passwords match')
       return;
     }
@@ -52,7 +52,7 @@ function SignupModal() {
       return response.json();
     }).then((data) => {
       // console.log(data);
-      if(data.name=="MongoError"){
+      if(data.name==="MongoError"){
         alert('This email is already in use');
         return;
       } else {
@@ -71,9 +71,9 @@ function SignupModal() {
     }).then((response) => {
       console.log('response here');
       console.log(response);
-      if(response.status == 422 || response.status == 400){
+      if(response.status === 422 || response.status === 400){
         alert('login failed');
-      } else if (response.status == 200){
+      } else if (response.status === 200){
         console.log('login succesful');
         document.location.replace('/home');
       }

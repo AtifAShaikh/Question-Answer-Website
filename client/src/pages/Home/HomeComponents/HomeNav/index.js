@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import './style.css';
 
 
@@ -7,7 +7,7 @@ function HomeNav() {
         <div className="mainNav">
             <div className="container">
             <nav className="navbar navbar-expand-lg navbar-light homeNav">
-            <a className="navbar-brand" href="#">Bounce</a>
+            <a className="navbar-brand" href="/home">Bounce</a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>

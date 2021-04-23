@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import './style.css';
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import HomeNav from '../Home/HomeComponents/HomeNav';
 import QuestionPageBody from './QuestionPageBody';
 

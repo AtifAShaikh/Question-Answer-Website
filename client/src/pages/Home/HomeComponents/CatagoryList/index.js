@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import CatagoryItem from "../CatagoryItem";
 import Catagories from './catagory';
 import './style.css';

@@ -3,6 +3,7 @@ import './style.css';
 import QuestionFeedItem from '../QuestionFeedItem';
 import { Editor } from "@tinymce/tinymce-react";
 import Catagories from "../CatagoryList/catagory";
+import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 
 
 
@@ -10,7 +11,9 @@ function QuestionFeed(props) {
 
   const [qFeedState, setQFeedState] = useState({
     questions: [],
-    filter: props.currentFilter
+    filter: props.currentFilter,
+    questionItems: [],
+    rawQuestions: [],
   });
 
   const [filterState, setFilterState] = useState({
@@ -21,15 +24,15 @@ function QuestionFeed(props) {
     setFilterState({
       filter: props.currentFilter,
     });
-    console.log(filterState.filter);
+    // console.log(filterState.filter);
   }, []);
 
   useEffect(()=>{
-    console.log(filterState.filter);
+    // console.log(filterState.filter);
   }, [filterState]);
 
   useEffect(()=>{
-    console.log(qFeedState);
+    // console.log(qFeedState);
     var QuestionFeedList;
     
     fetch('/api/questions', {
@@ -38,10 +41,16 @@ function QuestionFeed(props) {
       return response.json();
     }).then((data)=>{
       // console.log(data);
+      let k = -1;
+      let qItemsToPut = data.slice(0).reverse().map(question => {
+        k++;
+        return({id: k, name: question.title})
+      })
+
       let i=-1;
       QuestionFeedList = data.slice(0).reverse().map(question => {
         i++;
-        if(props.currentFilter == ''){
+        if(props.currentFilter === ''){
           return (
             <QuestionFeedItem 
               key={i} 
@@ -52,7 +61,7 @@ function QuestionFeed(props) {
               downvoters={question.downvoters}
               myId={question._id}
             ></QuestionFeedItem>);
-        } else if (props.currentFilter=='Asked'){
+        } else if (props.currentFilter==='Asked'){
           if(props.user.asked.includes(question._id)){
             return (
               <QuestionFeedItem 
@@ -67,7 +76,7 @@ function QuestionFeed(props) {
           } else {
             return(<div></div>);
           }
-        } else if (props.currentFilter=='Followed'){
+        } else if (props.currentFilter==='Followed'){
           if(props.user.followed.includes(question._id)){
             return (
               <QuestionFeedItem 
@@ -82,7 +91,7 @@ function QuestionFeed(props) {
           } else {
             return(<div></div>);
           }
-        } else if (props.currentFilter=='Answered'){
+        } else if (props.currentFilter==='Answered'){
           if(props.user.answered.includes(question._id)){
             return (
               <QuestionFeedItem 
@@ -98,7 +107,7 @@ function QuestionFeed(props) {
             return(<div></div>);
           }
         } else {
-          if(question.catagory != props.currentFilter){
+          if(question.catagory !== props.currentFilter){
             return(<div></div>);
           } else {
             return (
@@ -117,6 +126,8 @@ function QuestionFeed(props) {
       });
       setQFeedState({
         questions: QuestionFeedList,
+        questionItems: qItemsToPut,
+        rawQuestions: data,
       })
     })
   }, [props.currentFilter]);
@@ -162,9 +173,19 @@ function QuestionFeed(props) {
         });
     }
 
-    const searchQuestion = (e) => {
-        e.preventDefault();
+    // const searchQuestion = (e) => {
+    //     e.preventDefault();
         
+    // }
+
+    const handleOnSelect = (item) => {
+      // the item selected
+      // console.log(item)
+      qFeedState.rawQuestions.forEach((question)=>{
+        if(question.title === item.name){
+          document.location.replace(`/question/${question._id}`)
+        }
+      })
     }
 
     return (
@@ -172,7 +193,15 @@ function QuestionFeed(props) {
           {/* <h2>current filter: {props.currentFilter}</h2> */}
             <div className="searchCont d-flex justify-content-between align-items-center">
                 <div className="">
-                    <form className="form d-flex justify-content-center align-items-center flex-column searchForm">
+                    <div className="autoSearchCont">
+                    <ReactSearchAutocomplete
+                      items={qFeedState.questionItems}
+                      onSelect={handleOnSelect}
+                      autoFocus
+                    />
+                    </div>
+                  
+                    {/* <form className="form d-flex justify-content-center align-items-center flex-column searchForm">
                         <div className="searchCont">
                         <input
                         value={askQuestionInput.search}
@@ -189,7 +218,8 @@ function QuestionFeed(props) {
                     />
                     <button className="butt searchButton ml-3 align-center" onClick={searchQuestion}>Search</button>
                         </div>
-                    </form>
+                    
+                    </form> */}
                 </div>
                 <div className="">
                     <button className="butt searchButton askButton" data-toggle="modal" data-target=".ask" >Ask</button>

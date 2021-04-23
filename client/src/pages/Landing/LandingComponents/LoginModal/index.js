@@ -24,9 +24,9 @@ function LoginModal() {
     }).then((response) => {
       console.log('response here');
       console.log(response);
-      if(response.status == 422 || response.status == 400){
+      if(response.status === 422 || response.status === 400){
         alert('login failed');
-      } else if (response.status == 200){
+      } else if (response.status === 200){
         console.log('login succesful');
         document.location.replace('/home');
       }

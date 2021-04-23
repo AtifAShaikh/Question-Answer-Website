@@ -1,13 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import './style.css';
 
 function ProfileInfo(props){
 
     // console.log(props);
-    
 
-    useEffect(()=>{
-    })
+    // const [stats, setStats] = useState({
+    //     asked: 0,
+    //     answered: 0,
+    //     following: 0,
+    // })
+    
+    // console.log(props.user.asked);
+
+    // useEffect(()=>{
+    //     setStats({
+    //         asked: props.user.asked,
+    //         answered: props.user.answered,
+    //         following: props.user.followed,
+    //     })
+    // }, [props.user])
 
     const logout = () => {
         console.log('logout initiated');
@@ -24,9 +36,9 @@ function ProfileInfo(props){
         });
     }
 
-    const uploadImage = () => {
+    // const uploadImage = () => {
         
-    }
+    // }
 
     return(
         <div className="profileDiv d-flex justify-content-center align-items-center flex-column">
@@ -36,7 +48,7 @@ function ProfileInfo(props){
                     cloudName: "dj63qafw1", uploadPreset: "h7f3zhfs",
                     sources: [ 'local'],}, 
                     async (error, result) => {
-                        if(result.event == 'success'){
+                        if(result.event === 'success'){
                             let userPicObj = {
                                 picture: result.info.secure_url,
                             }
