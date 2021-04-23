@@ -1,0 +1,20 @@
+.qPageBody{
+    color: whitesmoke;
+}
+
+.qPagePic{
+    border-radius: 100px;
+}
+
+.qDisplayMain{
+    background-color: black;
+    border-radius: 20px;
+}
+
+.hideElement{
+    display: none;
+}
+
+.uiText{
+    color:  #0ec0a6;
+}

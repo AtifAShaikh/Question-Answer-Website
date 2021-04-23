@@ -1,23 +1,29 @@
 import React, { useState, useEffect } from "react";
+import './style.css';
 
-function QuestionFeedItem(){
+function QuestionFeedItem(props){
     return (
-        <div className="feedQuestionBody p-3 mb-3">
-        <p>🔬 Science</p>
-        <h3>Title goes here</h3>
-        <h7>Body of the question goes here, This is where one would put the info about their question and blah blah blah</h7>
+        <div className="feedQuestionBody p-3 mb-3" onClick={() => {
+            console.log(props.myId);
+            document.location.replace(`/question/${props.myId}`);
+        }}>
+        <p>{props.catagory}</p>
+        <h3>{props.title}</h3>
+        <div className="sepperator mb-3"></div>
+        <div dangerouslySetInnerHTML={{__html: props.body}} className="ml-3 bodyContent overflow-auto"></div>
+        <div className="sepperator mb-3"></div>
         <div className="d-flex align-items-center justify-content-start mt-2">
             <div className="d-flex align-items-start justify-content-start ml-2">
                 <img src="https://res.cloudinary.com/dj63qafw1/image/upload/v1618773391/upvote_wgxhu2.png" width="30px"></img>
-                <h4 className="ml-2">17</h4 >
+                <h4 className="ml-2">{props.upvoters.length}</h4 >
             </div>
             <div className="d-flex align-items-start justify-content-start ml-2">
                 <img src="https://res.cloudinary.com/dj63qafw1/image/upload/v1618773743/downvote_datjur.png" width="30px"></img>
-                <h4 className="ml-2">17</h4 >
+                <h4 className="ml-2">{props.downvoters.length}</h4 >
             </div>
             <div className="d-flex align-items-start justify-content-start ml-2">
                 <img src="https://res.cloudinary.com/dj63qafw1/image/upload/v1618774281/commentv2_xcsxyz.png" width="30px"></img>
-                <h4 className="ml-2">17</h4 >
+                <h4 className="ml-2">0</h4 >
             </div>
             
         </div>

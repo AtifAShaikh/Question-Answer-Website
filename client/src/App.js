@@ -6,6 +6,7 @@ import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
 import Landing from "./pages/Landing";
 import Home from "./pages/Home";
+import QuestionPage from './pages/QuestionPage'
 
 
 function App() {
@@ -18,8 +19,8 @@ function App() {
           <Route exact path={['/home']}>
             <Home></Home>
           </Route>
-          <Route exact path="/books/:id">
-            <Detail />
+          <Route exact path="/question/:id">
+            <QuestionPage></QuestionPage>
           </Route>
           <Route>
             <NoMatch />

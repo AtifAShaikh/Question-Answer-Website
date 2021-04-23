@@ -15,11 +15,18 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  create: function(req, res) {
-    db.Answers
+  create: async (req, res) => {
+    console.log('answer created')
+    await db.Answers
       .create(req.body)
-      .then(dbModel => res.json(dbModel))
+      .then(dbModel => console.log(dbModel))
       .catch(err => res.status(422).json(err));
+
+    await db.User.update({_id: req.body.userId}, {$push: {answered: req.body.questionId}})
+    .then((uModel) => {
+      console.log(uModel);
+      res.json({message: 'success'});
+    })   
   },
   update: function(req, res) {
     db.Answers
@@ -33,5 +40,21 @@ module.exports = {
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-  }
+  },
+  upvote: function(req, res) {
+    console.log('upvote route hit');
+    db.Answers.update({_id: req.body.aId}, {$push: {upvoters: req.session.user_id}})
+        .then((uModel) => {
+          console.log(uModel);
+          res.json({message: 'success'});
+        })    
+  },
+  downvote: function(req, res) {
+    console.log('upvote route hit');
+    db.Answers.update({_id: req.body.aId}, {$push: {downvoters: req.session.user_id}})
+        .then((uModel) => {
+          console.log(uModel);
+          res.json({message: 'success'});
+        })    
+  },
 };

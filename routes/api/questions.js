@@ -17,6 +17,10 @@ router
   .get(questionsController.findById)
   .put(questionsController.update)
   .delete(questionsController.remove);
+
+router.put('/upvote/upvoters', questionsController.upvote);
+router.put('/downvote/downvoters', questionsController.downvote);
+
 module.exports = router;
 
 

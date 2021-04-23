@@ -4,7 +4,7 @@ import './style.css';
 
 function HomeNav() {
     return (
-        <div className="mainBody">
+        <div className="mainNav">
             <div className="container">
             <nav className="navbar navbar-expand-lg navbar-light homeNav">
             <a className="navbar-brand" href="#">Bounce</a>
@@ -15,9 +15,6 @@ function HomeNav() {
                 <ul className="navbar-nav">
                 <li className="nav-item active">
                     <a className="nav-link" href="/home">Home</a>
-                </li>
-                <li className="nav-item active">
-                    <a className="nav-link" href="/activity">Activity</a>
                 </li>
                 </ul>
             </div>

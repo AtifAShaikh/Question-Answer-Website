@@ -14,7 +14,12 @@ function CatagoryList(props) {
 
     return (
         <div>
-            <h5>All Catagories</h5>
+            <h5>Activity</h5>
+            <CatagoryItem myText='Asked' filter={props.filter} key={999}></CatagoryItem>
+            <CatagoryItem myText='Answered' filter={props.filter} key={998}></CatagoryItem>
+            <CatagoryItem myText='Followed' filter={props.filter} key={997}></CatagoryItem>
+            <h5>Catagories</h5>
+            <CatagoryItem myText='🌎 All' filter={props.reset} key={996}></CatagoryItem>
             {catagoryItemList}
         </div>
     );

@@ -8,16 +8,130 @@ import Catagories from "../CatagoryList/catagory";
 
 function QuestionFeed(props) {
 
+  const [qFeedState, setQFeedState] = useState({
+    questions: [],
+    filter: props.currentFilter
+  });
+
+  const [filterState, setFilterState] = useState({
+    filter: '',
+  });
+
+  useEffect(()=>{
+    setFilterState({
+      filter: props.currentFilter,
+    });
+    console.log(filterState.filter);
+  }, []);
+
+  useEffect(()=>{
+    console.log(filterState.filter);
+  }, [filterState]);
+
+  useEffect(()=>{
+    console.log(qFeedState);
+    var QuestionFeedList;
+    
+    fetch('/api/questions', {
+      method: 'GET',
+    }).then((response)=>{
+      return response.json();
+    }).then((data)=>{
+      // console.log(data);
+      let i=-1;
+      QuestionFeedList = data.slice(0).reverse().map(question => {
+        i++;
+        if(props.currentFilter == ''){
+          return (
+            <QuestionFeedItem 
+              key={i} 
+              title={question.title} 
+              catagory={question.catagory} 
+              body={question.body}
+              upvoters={question.upvoters}
+              downvoters={question.downvoters}
+              myId={question._id}
+            ></QuestionFeedItem>);
+        } else if (props.currentFilter=='Asked'){
+          if(props.user.asked.includes(question._id)){
+            return (
+              <QuestionFeedItem 
+                key={i} 
+                title={question.title} 
+                catagory={question.catagory} 
+                body={question.body}
+                upvoters={question.upvoters}
+                downvoters={question.downvoters}
+                myId={question._id}
+              ></QuestionFeedItem>);
+          } else {
+            return(<div></div>);
+          }
+        } else if (props.currentFilter=='Followed'){
+          if(props.user.followed.includes(question._id)){
+            return (
+              <QuestionFeedItem 
+                key={i} 
+                title={question.title} 
+                catagory={question.catagory} 
+                body={question.body}
+                upvoters={question.upvoters}
+                downvoters={question.downvoters}
+                myId={question._id}
+              ></QuestionFeedItem>);
+          } else {
+            return(<div></div>);
+          }
+        } else if (props.currentFilter=='Answered'){
+          if(props.user.answered.includes(question._id)){
+            return (
+              <QuestionFeedItem 
+                key={i} 
+                title={question.title} 
+                catagory={question.catagory} 
+                body={question.body}
+                upvoters={question.upvoters}
+                downvoters={question.downvoters}
+                myId={question._id}
+              ></QuestionFeedItem>);
+          } else {
+            return(<div></div>);
+          }
+        } else {
+          if(question.catagory != props.currentFilter){
+            return(<div></div>);
+          } else {
+            return (
+              <QuestionFeedItem 
+                key={i} 
+                title={question.title} 
+                catagory={question.catagory} 
+                body={question.body}
+                upvoters={question.upvoters}
+                downvoters={question.downvoters}
+                myId={question._id}
+              ></QuestionFeedItem>);
+          }
+        }
+        
+      });
+      setQFeedState({
+        questions: QuestionFeedList,
+      })
+    })
+  }, [props.currentFilter]);
+
+
     var i = -1;
     const catagorySelectList = Catagories.map(catagory => {
         i++;
         // return <CatagoryItem myText={catagory} filter={props.filter} key={i}></CatagoryItem>;
-        return <option>{catagory}</option>;
+        return <option key={i}>{catagory}</option>;
     });
 
     const [askQuestionInput, setQuestionInput] = useState({
         body: '',
-        catagory: 'Arts',
+        catagory: '🎭 Arts',
         title: '',
         search: '',
       });
@@ -26,16 +140,36 @@ function QuestionFeed(props) {
 
     const submitQuestion = (e) => {
         e.preventDefault();
-        console.log(askQuestionInput);
+        let objToSend = {
+          title: askQuestionInput.title,
+          body: askQuestionInput.body,
+          catagory: askQuestionInput.catagory,
+          upvoters: [],
+          downvoters: [],
+          askerID: props.user._id,
+        }
+        console.log(objToSend);
+
+        fetch('/api/questions', {
+          method: 'POST',
+          body: JSON.stringify(objToSend),
+          headers: { 'Content-Type': 'application/json' }
+        }).then((response)=>{
+          return response.json();
+        }).then((data)=>{
+          // console.log(data);
+          document.location.reload();
+        });
     }
 
     const searchQuestion = (e) => {
         e.preventDefault();
-        console.log(askQuestionInput.search);
+        
     }
 
     return (
         <div>
+          {/* <h2>current filter: {props.currentFilter}</h2> */}
             <div className="searchCont d-flex justify-content-between align-items-center">
                 <div className="">
                     <form className="form d-flex justify-content-center align-items-center flex-column searchForm">
@@ -62,13 +196,7 @@ function QuestionFeed(props) {
                 </div>
             </div>
             <div className="mt-3">
-                {/* <div dangerouslySetInnerHTML={{__html: askQuestionInput.body}}></div> */}
-               <QuestionFeedItem></QuestionFeedItem>
-               <QuestionFeedItem></QuestionFeedItem>
-               <QuestionFeedItem></QuestionFeedItem>
-               <QuestionFeedItem></QuestionFeedItem>
-               <QuestionFeedItem></QuestionFeedItem>
-               
+               {qFeedState.questions}
             </div>
 
             <div className="modal fade bd-example-modal-xl ask" tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -79,9 +207,10 @@ function QuestionFeed(props) {
         <form className="form d-flex justify-content-center align-items-center flex-column mb-1">
         <h4 className="mt-3 modalTitle">Select a catagory for your question</h4>
 
-        <select class="form-control form-control-lg mt-4"
+        <select className="form-control form-control-lg mt-4"
         onChange={(e)=>{
-            var valueToSet = e.target.value.split(' ')[1];
+            // var valueToSet = e.target.value.split(' ')[1];
+            var valueToSet = e.target.value;
             setQuestionInput({
                 ...askQuestionInput,
                 catagory: valueToSet

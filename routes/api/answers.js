@@ -14,6 +14,9 @@ router
   .get(answersController.findById)
   .put(answersController.update)
   .delete(answersController.remove);
+
+router.put('/upvote/upvoters', answersController.upvote);
+router.put('/downvote/downvoters', answersController.downvote);
 module.exports = router;
 
 // router.post('/create', (req, res) => {
