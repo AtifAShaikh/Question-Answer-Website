@@ -68,7 +68,10 @@ function QuestionPageBody(props){
             body: JSON.stringify({id: qInfo.questionData._id}),
             headers: { 'Content-Type': 'application/json' },
         }).then(()=>{
-            document.location.reload();
+            setQInfo({
+                ...qInfo,
+                displayFollowButton: false,
+            });
         })
     }
 
@@ -78,7 +81,12 @@ function QuestionPageBody(props){
             body: JSON.stringify({qId: qInfo.questionData._id}),
             headers: { 'Content-Type': 'application/json' },
         }).then(()=>{
-            document.location.reload();
+            // document.location.reload();
+            setQInfo({
+                ...qInfo,
+                displayUpvoteButton: false,
+                upvotes: (qInfo.upvotes + 1),
+            });
         })
     }
 
@@ -88,7 +96,11 @@ function QuestionPageBody(props){
             body: JSON.stringify({qId: qInfo.questionData._id}),
             headers: { 'Content-Type': 'application/json' },
         }).then(()=>{
-            document.location.reload();
+            setQInfo({
+                ...qInfo,
+                displayDownvoteButton: false,
+                downvotes: (qInfo.downvotes + 1),
+            });
         })
     }
 

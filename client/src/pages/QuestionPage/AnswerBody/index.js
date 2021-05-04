@@ -12,6 +12,7 @@ function AnswerBody(props){
         downvoters: 0,
         displayUpvoteButton: true,
         displayDownvoteButton: true,
+        displayAskerApprovedTag: false,
     });
 
     useEffect(()=>{
@@ -31,6 +32,11 @@ function AnswerBody(props){
                 downvoteState=false;
             }
 
+            let tagState = false;
+            if(props.answerData.favorited){
+                tagState = true;
+            }
+
 
             setAnswerInfo({
                 answer: props.answerData,
@@ -41,13 +47,14 @@ function AnswerBody(props){
                 downvoters: props.answerData.downvoters.length,
                 displayUpvoteButton: upvoteState,
                 displayDownvoteButton: downvoteState,
+                displayAskerApprovedTag: tagState,
             })
         })
     }, [])
 
     const askerApprovedTag = ()=> {
-        console.log(props.answerData.favorited);
-        if(props.answerData.favorited){
+        // console.log(props.answerData.favorited);
+        if(answerInfo.displayAskerApprovedTag){
             return(
                 <p className="fav">🤩 - Asker Approved - 🤩</p>
             );
@@ -57,7 +64,7 @@ function AnswerBody(props){
     }
 
     const giveFavButton = ()=>{
-        if(answerInfo.asker._id===answerInfo.user._id && !answerInfo.answer.favorited){
+        if(answerInfo.asker._id===answerInfo.user._id && !answerInfo.displayAskerApprovedTag){
             return(
                 <button className="butt aButt" onClick={()=>{
                     favoriteAnswer();
@@ -108,7 +115,11 @@ function AnswerBody(props){
             body: JSON.stringify({favorited: true}),
             headers: { 'Content-Type': 'application/json' },
         }).then((res)=>{
-            document.location.reload();
+            // document.location.reload();
+            setAnswerInfo({
+                ...answerInfo,
+                displayAskerApprovedTag: true,
+            })
         })
     }
 
@@ -118,7 +129,12 @@ function AnswerBody(props){
             body: JSON.stringify({aId: answerInfo.answer._id}),
             headers: { 'Content-Type': 'application/json' },
         }).then(()=>{
-            document.location.reload();
+            // document.location.reload();
+            setAnswerInfo({
+                ...answerInfo,
+                displayUpvoteButton: false,
+                upvoters: (answerInfo.upvoters+1)
+            });
         })
     }
 
@@ -128,7 +144,12 @@ function AnswerBody(props){
             body: JSON.stringify({aId: answerInfo.answer._id}),
             headers: { 'Content-Type': 'application/json' },
         }).then(()=>{
-            document.location.reload();
+            // document.location.reload();
+            setAnswerInfo({
+                ...answerInfo,
+                displayDownvoteButton: false,
+                downvoters: (answerInfo.downvoters+1)
+            });
         })
     }
 
